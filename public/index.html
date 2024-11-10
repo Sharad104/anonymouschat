@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anonymous Chat & Poll App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Anonymous Chat</h2>
+        
+        <!-- Chat Window -->
+        <div id="chat-window">
+            <ul id="messages"></ul>
+        </div>
+
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <button id="send-btn">Send</button>
+
+        <h3>Create a Poll</h3>
+        <input type="text" id="poll-question" placeholder="Poll question">
+        <input type="text" id="poll-option" placeholder="Options (comma separated)">
+        <button id="create-poll-btn">Create Poll</button>
+
+        <div id="polls"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

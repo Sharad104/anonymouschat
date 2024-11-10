@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f4f4f9;
+    margin: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#chat-window {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+#messages {
+    list-style: none;
+    padding: 0;
+}
+
+#message-input {
+    width: calc(100% - 65px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+
+#send-btn, #create-poll-btn {
+    padding: 10px 15px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.poll {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.poll strong {
+    font-size: 1.1em;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.poll button {
+    margin-top: 5px;
+    padding: 8px 10px;
+    border: 1px solid #007bff;
+    color: #007bff;
+    background: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+}
+
+.poll-results {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+
+.poll-results li {
+    padding: 5px;
+    font-size: 0.9em;
+}
+
+@media (max-width: 600px) {
+    #message-input, #send-btn, #poll-question, #poll-option, #create-poll-btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    #chat-window {
+        max-height: 400px;
+    }
+}
