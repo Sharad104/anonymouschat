@@ -1,6 +1,6 @@
-const socket = io();
+const socket = io();  // Initialize connection to server
 
-// Display messages
+// Display chat messages
 socket.on('chat-message', ({ username, message }) => {
     const item = document.createElement('li');
     item.textContent = `${username}: ${message}`;
@@ -30,11 +30,11 @@ document.getElementById('send-btn').onclick = () => {
     document.getElementById('message-input').value = '';
 };
 
-// Create poll
+// Create a new poll
 document.getElementById('create-poll-btn').onclick = () => {
     const question = document.getElementById('poll-question').value;
     const options = document.getElementById('poll-option').value.split(',');
-    
+
     if (question.trim() === '' || options.length < 2) {
         alert('Please provide a question and at least two options.');
         return;
@@ -59,11 +59,11 @@ socket.on('new-poll', ({ id, question, options }) => {
     document.getElementById('polls').appendChild(pollDiv);
 });
 
-// Update poll votes
+// Update poll results
 socket.on('poll-update', ({ pollId, voteCounts, options }) => {
     const pollResults = document.getElementById(`${pollId}-results`);
     pollResults.innerHTML = '';
-    
+
     options.forEach((option, index) => {
         const voteItem = document.createElement('li');
         voteItem.textContent = `${option}: ${voteCounts[index] || 0} votes`;
