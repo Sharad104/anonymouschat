@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anonymous Chat & Poll App</title>
+    <link rel="icon" href="./favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -11,6 +12,12 @@
     <div class="container">
         <h2>Anonymous Chat</h2>
         
+        <!-- Active Users Display -->
+        <div id="active-users">
+            <img src="./green-icon.png" alt="User Icon" class="user-icon">
+            <span id="active-users-count">0</span> <span> Online </span>
+        </div>
+
         <!-- Chat Window -->
         <div id="chat-window">
             <ul id="messages"></ul>

@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     activeUsers++; // Increment active users
 
     // Notify all users that a new user has joined
-    io.emit('user-connected', username);
+    io.emit('user-connected', { username, activeUsers });
 
     // Handle chat messages
     socket.on('chat-message', (message) => {
@@ -79,7 +79,7 @@ io.on('connection', (socket) => {
     // Handle user disconnect
     socket.on('disconnect', () => {
         activeUsers--; // Decrement active users
-        io.emit('user-disconnected', username);
+        io.emit('user-disconnected', { username, activeUsers });
 
         // Reset user count if no active users are left
         if (activeUsers === 0) {

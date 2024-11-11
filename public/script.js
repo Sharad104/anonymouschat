@@ -8,19 +8,23 @@ socket.on('chat-message', ({ username, message }) => {
 });
 
 // Display when a user joins
-socket.on('user-connected', (username) => {
+socket.on('user-connected', ({ username, activeUsers }) => {
     const item = document.createElement('li');
     item.textContent = `${username} joined the chat`;
+    item.style.color = 'green';
     item.style.fontStyle = 'italic';
     document.getElementById('messages').appendChild(item);
+    updateActiveUsers(activeUsers);
 });
 
 // Display when a user leaves
-socket.on('user-disconnected', (username) => {
+socket.on('user-disconnected', ({ username, activeUsers }) => {
     const item = document.createElement('li');
     item.textContent = `${username} left the chat`;
+    item.style.color = 'red';
     item.style.fontStyle = 'italic';
     document.getElementById('messages').appendChild(item);
+    updateActiveUsers(activeUsers);
 });
 
 // Send chat messages
@@ -70,3 +74,13 @@ socket.on('poll-update', ({ pollId, voteCounts, options }) => {
         pollResults.appendChild(voteItem);
     });
 });
+
+// Update active users count
+function updateActiveUsers(count) {
+    const activeUserCount = document.getElementById('active-users-count');
+    activeUserCount.textContent = count;
+
+    // Add and remove an "active" class for scaling animation
+    activeUserCount.classList.add('active');
+    setTimeout(() => activeUserCount.classList.remove('active'), 300);
+}
