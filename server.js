@@ -1,4 +1,3 @@
-// Import required packages
 const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
@@ -12,11 +11,12 @@ const io = new Server(server);
 let userCount = 0;
 let activeUsers = 0; // Track active users
 
+// Poll data storage (to persist polls across connections)
+let polls = [];
+let userVotes = {};  // Track votes per user
+
 // Serve static files (public folder for frontend)
 app.use(express.static('public'));
-
-// Poll data storage (if you want to persist polls across connections)
-let polls = [];
 
 // Socket.IO for real-time communication
 io.on('connection', (socket) => {
@@ -49,9 +49,29 @@ io.on('connection', (socket) => {
 
     // Handle voting on a poll
     socket.on('vote', ({ pollId, optionIndex }) => {
+        // Check if the user has already voted on this poll
+        if (userVotes[socket.username] && userVotes[socket.username][pollId] !== undefined) {
+            // User has already voted, remove the previous vote
+            const previousVote = userVotes[socket.username][pollId];
+            polls.forEach(poll => {
+                if (poll.id === pollId) {
+                    poll.votes[previousVote]--; // Decrement the previous vote
+                }
+            });
+        }
+
         const poll = polls.find(p => p.id === pollId);
         if (poll) {
+            // Increment the vote for the selected option
             poll.votes[optionIndex]++;
+
+            // Record the user's new vote for this poll
+            if (!userVotes[socket.username]) {
+                userVotes[socket.username] = {};
+            }
+            userVotes[socket.username][pollId] = optionIndex; // Save user's choice for the poll
+
+            // Broadcast the updated poll results
             io.emit('poll-update', { pollId, voteCounts: poll.votes, options: poll.options });
         }
     });
@@ -64,6 +84,7 @@ io.on('connection', (socket) => {
         // Reset user count if no active users are left
         if (activeUsers === 0) {
             userCount = 0; // Reset anonymous name count
+            userVotes = {}; // Clear all user vote data
         }
     });
 });
