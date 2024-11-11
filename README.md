@@ -2,7 +2,9 @@
 
 A simple, responsive, anonymous chat application with poll creation and voting features, built with Express.js and Socket.IO.
 
-[![Anonymous-Chat.jpg](https://i.postimg.cc/KYyCRvZ2/Anonymous-Chat.jpg)](https://postimg.cc/xXt6ZQJx)
+[![Screenshot-1.jpg](https://i.postimg.cc/JzSkFXZJ/Screenshot-1.jpg)](https://postimg.cc/K1rjkR9v)
+
+[![Screenshot-2.jpg](https://i.postimg.cc/ZK2nYSnz/Screenshot-2.jpg)](https://postimg.cc/dLRwngG5)
 
 ## Features
 
